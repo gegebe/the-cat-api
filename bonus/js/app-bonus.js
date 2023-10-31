@@ -23,8 +23,8 @@ async function obtainRandomAnimal(url){
   let newAnimal = processedData[0];
 
   imgNewAnimal.src = newAnimal.url;
-  widthNewAnimal.textContent = newAnimal.width;
-  heightNewAnimal.textContent = newAnimal.height;
+  widthNewAnimal.textContent = `${newAnimal.width}px`;
+  heightNewAnimal.textContent = `${newAnimal.height}px`;
 
 }
 
