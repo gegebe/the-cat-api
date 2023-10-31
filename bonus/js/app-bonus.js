@@ -1,34 +1,34 @@
-let buttonNewCat = document.querySelector("#get-cat");
-let imgNewCat = document.querySelector("#cat-image");
-let widthNewCat = document.querySelector("#width span");
-let heightNewCat = document.querySelector("#height span");
-let userSelect = document.querySelector("select option");
+let buttonNewAnimal = document.querySelector("#get-cat");
+let imgNewAnimal = document.querySelector("#cat-image");
+let widthNewAnimal = document.querySelector("#width span");
+let heightNewAnimal = document.querySelector("#height span");
+let userSelect = document.querySelector("select");
 
 async function obtainURL(){
   let urlDogAPI = "https://api.thedogapi.com/v1/images/search";
   let urlCatAPI = "https://api.thecatapi.com/v1/images/search";
   
-  url = (userSelect.value === "gato")? urlCatAPI : urlDogAPI;
+  let url = (userSelect.value === "gato")? urlCatAPI : urlDogAPI;
   console.log(url);
 
   return url;
 }
 
-
 async function obtainRandomAnimal(url){
 
-  let obtainCat = await fetch(url);
-  //console.log(obtainCat);
+  //let url = await obtainURL();
+  let obtainAnimal = await fetch(url);
+  let processedData = await obtainAnimal.json();
 
-  let processedData = await obtainCat.json();
-  //console.log(processedData[0]);
+  let newAnimal = processedData[0];
 
-  let newCat = processedData[0];
-
-  imgNewCat.src = newCat.url;
-  widthNewCat.textContent = newCat.width;
-  heightNewCat.textContent = newCat.height;
+  imgNewAnimal.src = newAnimal.url;
+  widthNewAnimal.textContent = newAnimal.width;
+  heightNewAnimal.textContent = newAnimal.height;
 
 }
 
-buttonNewCat.addEventListener("click", obtainRandomAnimal);
+buttonNewAnimal.addEventListener("click", async ()=>{
+  let url = await obtainURL();
+  await obtainRandomAnimal(url);
+} );
