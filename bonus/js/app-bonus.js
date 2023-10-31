@@ -2,19 +2,26 @@ let buttonNewCat = document.querySelector("#get-cat");
 let imgNewCat = document.querySelector("#cat-image");
 let widthNewCat = document.querySelector("#width span");
 let heightNewCat = document.querySelector("#height span");
+let userSelect = document.querySelector("select option");
 
-let urlDogAPI = "https://api.thedogapi.com/v1/images/search";
-let urlCatAPI = "https://api.thecatapi.com/v1/images/search";
+async function obtainURL(){
+  let urlDogAPI = "https://api.thedogapi.com/v1/images/search";
+  let urlCatAPI = "https://api.thecatapi.com/v1/images/search";
+  
+  url = (userSelect.value === "gato")? urlCatAPI : urlDogAPI;
+  console.log(url);
 
-function selectedAnimal()
+  return url;
+}
+
 
 async function obtainRandomAnimal(url){
 
   let obtainCat = await fetch(url);
-  console.log(obtainCat);
+  //console.log(obtainCat);
 
   let processedData = await obtainCat.json();
-  console.log(processedData[0]);
+  //console.log(processedData[0]);
 
   let newCat = processedData[0];
 
